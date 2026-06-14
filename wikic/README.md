@@ -19,7 +19,7 @@ Real-world impact: **~55% token reduction** per coding task when the Wiki covers
 
 ```bash
 # From skills.sh (recommended)
-npx skills add 1hzio/agent-skills --skill wikic
+npx skills add yixian-huang/agent-skills --skill wikic
 
 # Claude Code CLI
 claude skill install /path/to/agent-skills/wikic
