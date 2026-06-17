@@ -101,3 +101,32 @@ When converting Docker-based instructions or mental models to `container`:
 
 Flags map closely: `-d`/`--detach`, `--rm`, `--name`, `-it`/`-ti`, `-e`, `-v`, `-p`.
 Always ensure `container system start` has been run before build/run operations.
+
+## Container-Compose command reference
+
+[Container-Compose](https://github.com/Mcrich23/Container-Compose) is an optional,
+third-party tool that adds Compose-style orchestration to Apple Container. It does
+not ship with `container`; install it separately with `brew install container-compose`.
+
+| Command | Description |
+|---------|-------------|
+| `container-compose up` | Create and start services from the Compose file |
+| `container-compose down` | Stop and remove services |
+| `container-compose ps` | List running services |
+| `container-compose logs [service]` | View service logs |
+| `container-compose exec <service> <command>` | Run a command in a running service container |
+| `container-compose build [service]` | Build images defined in the Compose file |
+
+### Common flags
+
+- `-f`, `--file <path>` — path to the Compose file (default `docker-compose.yml`)
+- `-e`, `--env <path>` — path to the environment file (default `.env`)
+- `-d`, `--detach` — run services in the background when supported
+
+### Notes
+
+- Container-Compose has limited Docker Compose compatibility; unsupported directives
+  may be ignored or cause errors.
+- Service DNS names work best on macOS 26 (Tahoe). On macOS 15 (Sequoia), services may
+  need to communicate via container IPs.
+- Ensure `container system start` has been run before using `container-compose up`.

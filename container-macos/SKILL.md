@@ -120,6 +120,55 @@ Default registry is Docker Hub. Change it in `~/.config/container/config.toml`:
 domain = "my-registry.example.com"
 ```
 
+### 6. Run multi-container apps with Container-Compose (optional)
+
+Apple's `container` CLI does not include native multi-container orchestration or
+Compose file support. [Container-Compose](https://github.com/Mcrich23/Container-Compose)
+is a third-party tool that brings a Docker-Compose-like workflow to Apple Container
+for local multi-service apps.
+
+Install via Homebrew:
+
+```bash
+brew update
+brew install container-compose
+```
+
+Start services defined in a Compose file:
+
+```bash
+container-compose up
+```
+
+Stop and remove them:
+
+```bash
+container-compose down
+```
+
+You can point to a specific Compose or environment file:
+
+```bash
+container-compose up -f /path/to/docker-compose.yml -e /path/to/.env
+```
+
+#### When to use it
+
+- Use `container` directly for one-off containers, image builds, and simple commands.
+- Use `container-compose` when you have multiple services, dependencies, volumes, or
+  environment variables declared in a Compose file and want a single command to start
+  the whole stack on macOS without Docker Desktop.
+
+#### Limitations
+
+- This is a community project with **limited** Docker Compose compatibility; not every
+  Compose directive is supported.
+- Local DNS auto-configuration works best on macOS 26 (Tahoe). On macOS 15 (Sequoia),
+  DNS may not be configured automatically, so services may need to reach each other by
+  container IP.
+- For complex production Compose files or unsupported features, fall back to Docker
+  Compose or run the services directly with `container`.
+
 ## macOS-specific notes
 
 ### Local DNS domain (optional)
